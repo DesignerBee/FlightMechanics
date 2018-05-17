@@ -1,11 +1,11 @@
 #Run in a Vpython IDE
-#Copyrights Mayank Raj -(B17EE041),Swar Vaidya-(B17EE0XX), Harshit Sharma(B17EE033)
+#Copyrights DesignerBee
 
 from visual import *
 from math import *
 if __name__ == '__main__':
     #Scene Essentials
-    frameX = display(title='Projectile_MSH',
+    frameX = display(title='Projectile_DB',
          x=0, y=0, width=600, height=200,
          center=(500,100,0), background=(0,0,0))
     frameX.fullscreen=True

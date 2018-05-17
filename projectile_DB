@@ -22,7 +22,8 @@ print("Angle Of projection:")
 theta=float(input())
 print("Value of g(gravitational) constant:")
 g=float(input())
-print("Value of Viscosity of the fluid")
+print("Value of Viscosity of the fluid
+")
 neta=float(input())
 print("Initial Velocity Of launch:")
 v=float(input())"""

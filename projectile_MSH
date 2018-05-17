@@ -1,0 +1,71 @@
+from visual import *
+from math import *
+
+#creating objects
+traj_sph=sphere(pos=(0,0,0),radius=2,color=color.red,make_trail = True)
+traj_sph_drag=sphere(pos=(0,0,0),radius=2,color=color.yellow,make_trail = True)
+t=0
+
+#Test Cases-
+theta=0.5 #28.6479 degrees
+g=10
+neta=0.0000181
+v=100
+m=10
+
+#Data Collection
+"""print("Pleae input the mass:")
+m=float(input())
+print("Please input the value of the radius:")
+traj_sph_drag.radius= float(input())
+print("Angle Of projection:")
+theta=float(input())
+print("Value of g(gravitational) constant:")
+g=float(input())
+print("Value of Viscosity of the fluid")
+neta=float(input())
+print("Initial Velocity Of launch:")
+v=float(input())"""
+
+#Constants Calculations-
+k = 6*pi*neta*traj_sph_drag.radius
+Fg=m*g
+
+#creating X-Y Axis system
+axis_box_x_n=box(pos=(500,0,0),length=10000,width=1,height=1,axis=(1,0,0))
+axis_box_y_n=box(pos=(0,500,0),length=10000,width=1,height=1,axis=(0,1,0))
+                
+    
+#Computational Mechanics(Code)-(Red Ball)(No Drag)
+vel_vector=vector(v*cos(theta),v*sin(theta))
+#print("Velocity in vectorial form")
+#print(vel_vector)
+
+while traj_sph.pos.y>=0:
+    rate(30)
+    traj_sph.pos.x= vel_vector.x*t
+    traj_sph.pos.y= vel_vector.y*t - g*t*t
+    #print(traj_sph.pos)
+    t+=0.1
+print(t)
+
+t=0 #time reset      
+#Computational Mechanics(Code)- (Yellow Ball)(Linear Drag= -kv)
+while traj_sph_drag.y>=0:
+    rate(30)
+    traj_sph_drag.x= (vel_vector.x*m/k)*(1-exp(-k*t/m))
+    traj_sph_drag.y= (Fg/k)*(m*(1-exp(-k*t/m))/k+ t*(vel_vector.y*k/Fg-1))
+    #print(traj_sph_drag.pos)
+    t+=0.01
+print(t)
+
+t=0 #reset time
+
+#Computational Mechanics(Code)- (Yellow Ball)(Quadratic Drag= -kv^2)
+while traj_sph_drag.y>=0:
+    rate(30)
+    traj_sph_drag.x= (vel_vector.x*m/k)*ln(1+ k*t/m)
+    traj_sph_drag.y= (Fg/k)*(m*(1-exp(-k*t/m))/k+ t*(vel_vector.y*k/Fg-1))
+    #print(traj_sph_drag.pos)
+    t+=0.01
+print(t)
